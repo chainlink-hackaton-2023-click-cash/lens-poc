@@ -17,5 +17,6 @@
     "jsx": "react-jsx"
   },
   "include": ["src"],
+  "files": ["./codegen.ts", "src/graphql/auth-fetcher.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
