@@ -5,6 +5,8 @@ import {
 } from './graphql/generated';
 import { ConnectWallet, useAddress } from '@thirdweb-dev/react';
 import useLogin from './lib/auth/useLogin';
+import * as React from 'react';
+import SignInButton from './components/SignInButton';
 
 export default function Home() {
   const { data, isLoading, error } = useExplorePublicationsQuery({
@@ -18,13 +20,13 @@ export default function Home() {
   const address = useAddress();
   const { mutate: requestLogin } = useLogin();
 
-  if (!address) {
-    return <ConnectWallet />;
-  }
+  // if (!address) {
+  //   return <ConnectWallet />;
+  // }
 
   return (
     <div className='container'>
-      <button onClick={() => requestLogin()}>Login</button>
+      <SignInButton></SignInButton>
     </div>
   );
 }

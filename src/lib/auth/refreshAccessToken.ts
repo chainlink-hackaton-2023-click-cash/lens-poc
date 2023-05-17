@@ -1,5 +1,3 @@
-import { logger } from 'ethers';
-import { fetcher } from '../../graphql/auth-fetcher';
 import {
   RefreshMutation,
   RefreshMutationVariables,

@@ -1,7 +1,7 @@
 import { useAddress, useSDK } from '@thirdweb-dev/react';
 import generateChallenge from './generateChallenge';
 import { useAuthenticateMutation } from '../../graphql/generated';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { setAccessToken } from './helpers';
 
 export default function useLogin() {
@@ -9,6 +9,7 @@ export default function useLogin() {
   const sdk = useSDK();
 
   const { mutateAsync: sendSignedMessage } = useAuthenticateMutation();
+  const client = useQueryClient();
 
   async function login() {
     if (!address) return;
@@ -27,6 +28,10 @@ export default function useLogin() {
     // extract and store in local storage
     const { accessToken, refreshToken } = authenticate;
     setAccessToken(accessToken, refreshToken);
+
+    // this invalidates the query useQuery(['lens-user', address] from useLensUser.ts
+    // so UI is updated accordingly when signed in
+    client.invalidateQueries(['lens-user', address]);
   }
   // wrap the login() function with the useMutation wrapper function
   return useMutation(login);
