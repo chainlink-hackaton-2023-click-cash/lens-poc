@@ -1,9 +1,10 @@
-import { ConnectWallet } from '@thirdweb-dev/react';
 import './styles/Home.css';
 import {
   PublicationSortCriteria,
   useExplorePublicationsQuery,
 } from './graphql/generated';
+import { ConnectWallet, useAddress } from '@thirdweb-dev/react';
+import useLogin from './lib/auth/useLogin';
 
 export default function Home() {
   const { data, isLoading, error } = useExplorePublicationsQuery({
@@ -12,19 +13,18 @@ export default function Home() {
       sortCriteria: PublicationSortCriteria.Latest,
     },
   });
+  // console.log({ data, isLoading, error });
 
-  console.log({ data, isLoading, error });
+  const address = useAddress();
+  const { mutate: requestLogin } = useLogin();
+
+  if (!address) {
+    return <ConnectWallet />;
+  }
 
   return (
     <div className='container'>
-      <div className='connect'>
-        <ConnectWallet
-          dropdownPosition={{
-            align: 'center',
-            side: 'bottom',
-          }}
-        />
-      </div>
+      <button onClick={() => requestLogin()}>Login</button>
     </div>
   );
 }
