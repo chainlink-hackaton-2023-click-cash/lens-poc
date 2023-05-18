@@ -5,7 +5,7 @@ import {
   useSwitchChain,
   ChainId,
 } from '@thirdweb-dev/react';
-import React from 'react';
+import * as React from 'react';
 import useLensUser from '../lib/auth/useLensUser';
 import useLogin from '../lib/auth/useLogin';
 
@@ -34,8 +34,10 @@ export default function SignInButton({}: Props) {
     return <div>Loading...</div>;
   }
 
-  console.log('isSignedInQuery.data', isSignedInQuery.data);
-  //  the workflow her is not correct, it is showing directly     return <div>No Lens Profile</div>;
+  if (isSignedInQuery.error) {
+    console.log('Error: ', isSignedInQuery.error);
+  }
+
   if (!isSignedInQuery.data) {
     return (
       <button onClick={() => requestLogin()}>Sign in with Leans please</button>
@@ -46,7 +48,9 @@ export default function SignInButton({}: Props) {
     return <div>Loading...</div>;
   }
 
-  // console.log('profileQuery.data', profileQuery.data);
+  if (profileQuery.error) {
+    console.log('Error: ', profileQuery.error);
+  }
 
   if (!profileQuery.data?.defaultProfile) {
     return <div>No Lens Profile</div>;

@@ -7,10 +7,10 @@ export default function useLensUser() {
   // get address of the connected wallet
   const address = useAddress();
 
-  // get authentication token for connected wallet
-  const localStorageQuery = useQuery(['lens-user', address], () => {
-    readAccessToken();
-  });
+  // get authentication token for connected wallet from local storage
+  const localStorageQuery = useQuery(['lens-user', address], () =>
+    readAccessToken()
+  );
 
   // get the default profile for the connected wallet
   const profileQuery = useDefaultProfileQuery(
