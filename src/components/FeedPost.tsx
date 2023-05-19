@@ -19,15 +19,19 @@ export default function FeedPost({ publication }: Props) {
           alt={publication.profile.name || publication.profile.handle}
           className={styles.feedPostProfilePicture}
         ></MediaRenderer>
+
+        <Link
+          to={`/profile/${publication.profile.handle}`}
+          className={styles.feedPostProfileName}
+        >
+          {publication.profile.name || publication.profile.handle}
+        </Link>
+
         <Routes>
           <Route
-            // path={`/profile/:${publication.profile.handle}`}
-            path='/profile/:user'
+            path={`/profile/${publication.profile.handle}`}
             element={<UserProfilePage />}
-            //   className={styles.feedPostProfileName}
-          >
-            {publication.profile.name || publication.profile.handle}
-          </Route>
+          ></Route>
         </Routes>
 
         <div className={styles.feedPostContent}>
@@ -44,6 +48,20 @@ export default function FeedPost({ publication }: Props) {
               className={styles.feedPostContentImage}
             ></MediaRenderer>
           )}
+        </div>
+        <div className={styles.feedPostFooter}>
+          <p>
+            {publication.stats.totalAmountOfMirrors}
+            {' Mirrors'}
+          </p>
+          <p>
+            {publication.stats.totalAmountOfComments}
+            {' Comments'}
+          </p>
+          <p>
+            {publication.stats.totalAmountOfCollects}
+            {' Collects'}
+          </p>
         </div>
       </div>
     </div>

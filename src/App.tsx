@@ -6,7 +6,8 @@ import * as React from 'react';
 import SignInButton from './components/SignInButton';
 import styles from './styles/Home.module.css';
 import FeedPost from './components/FeedPost';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { UserProfilePage } from './pages/profile/UserProfilePage';
 
 export default function Home() {
   const { data, isLoading, error } = useExplorePublicationsQuery(
@@ -33,6 +34,7 @@ export default function Home() {
 
   return (
     <BrowserRouter>
+      <SignInButton />
       <div className={styles.container}>
         <div className={styles.postsContainer}>
           {data.explorePublications.items.map((publication) => (
