@@ -7,8 +7,8 @@ import {
   MediaRenderer,
 } from '@thirdweb-dev/react';
 import * as React from 'react';
-import useLensUser from '../lib/auth/useLensUser';
-import useLogin from '../lib/auth/useLogin';
+import useLensUser from '../../lib/auth/useLensUser';
+import useLogin from '../../lib/auth/useLogin';
 
 type Props = {};
 
@@ -24,11 +24,7 @@ export default function SignInButton({}: Props) {
   }
 
   if (isOnWrongNetwork) {
-    return (
-      <button onClick={() => switchChain(ChainId.Mumbai)}>
-        Switch network
-      </button>
-    );
+    return <button onClick={() => switchChain(ChainId.Mumbai)}>Switch network</button>;
   }
 
   if (isSignedInQuery.isLoading) {
@@ -40,9 +36,7 @@ export default function SignInButton({}: Props) {
   }
 
   if (!isSignedInQuery.data) {
-    return (
-      <button onClick={() => requestLogin()}>Sign in with Leans please</button>
-    );
+    return <button onClick={() => requestLogin()}>Sign in with Leans please</button>;
   }
 
   if (profileQuery.isLoading) {

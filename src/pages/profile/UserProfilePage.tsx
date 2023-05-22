@@ -1,13 +1,9 @@
 import * as React from 'react';
-import styles from '../../styles/Profile.module.css';
+import styles from './UserProfile.module.css';
 import { useProfileQuery, usePublicationsQuery } from '../../graphql/generated';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { MediaRenderer, Web3Button } from '@thirdweb-dev/react';
-import FeedPost from '../../components/FeedPost';
-import {
-  LENS_CONTRACT_ABI_MUMBAI,
-  LENS_CONTRACT_ADDRESS_MUMBAI,
-} from '../../const/contracts';
+import { LENS_CONTRACT_ABI_MUMBAI, LENS_CONTRACT_ADDRESS_MUMBAI } from '../../const/contracts';
 import { useFollow } from '../../lib/useFollow';
 
 type Props = {};
@@ -62,9 +58,7 @@ export function UserProfilePage({}: Props) {
           <MediaRenderer
             // @ts-ignore
             media={profileData?.profile?.coverPicture?.original?.url || ''}
-            alt={
-              profileData?.profile?.name || profileData?.profile?.handle || ''
-            }
+            alt={profileData?.profile?.name || profileData?.profile?.handle || ''}
             className={styles.coverImageContainer}
           ></MediaRenderer>
         )}
@@ -73,18 +67,12 @@ export function UserProfilePage({}: Props) {
           <MediaRenderer
             // @ts-ignore
             media={profileData.profile.picture?.original.url || ''}
-            alt={
-              profileData?.profile?.name || profileData?.profile?.handle || ''
-            }
+            alt={profileData?.profile?.name || profileData?.profile?.handle || ''}
             className={styles.profilePictureContainer}
           ></MediaRenderer>
         )}
-        <h1 className={styles.profileName}>
-          {profileData?.profile?.name || 'No name user'}
-        </h1>
-        <p className={styles.profileHandle}>
-          {profileData?.profile?.handle || 'No handle user'}
-        </p>
+        <h1 className={styles.profileName}>{profileData?.profile?.name || 'No name user'}</h1>
+        <p className={styles.profileHandle}>{profileData?.profile?.handle || 'No handle user'}</p>
         <p className={styles.profileDescription}>{profileData?.profile?.bio}</p>
 
         <p className={styles.followers}>

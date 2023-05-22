@@ -1,8 +1,8 @@
 import * as React from 'react';
-import styles from '../styles/Header.module.css';
+import styles from './Header.module.css';
 import { Link } from 'react-router-dom';
 import SignInButton from './SignInButton';
-import mini from '../public/mini.jpeg';
+import mini from '../../public/mini.jpeg';
 
 export default function Header() {
   return (
@@ -10,7 +10,7 @@ export default function Header() {
       <div className={styles.headerContainer}>
         <div className={styles.left}>
           <Link to={'/'}>
-            <img src={mini} alt='logo' className={styles.logo}></img>
+            <img src={mini} alt="logo" className={styles.logo}></img>
           </Link>
           <Link to={'/create'}>Create</Link>
         </div>
