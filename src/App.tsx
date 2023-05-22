@@ -1,7 +1,4 @@
-import {
-  PublicationSortCriteria,
-  useExplorePublicationsQuery,
-} from './graphql/generated';
+import { PublicationSortCriteria, useExplorePublicationsQuery } from './graphql/generated';
 import * as React from 'react';
 import SignInButton from './components/SignInButton';
 import styles from './styles/Home.module.css';
@@ -9,7 +6,7 @@ import FeedPost from './components/FeedPost';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { UserProfilePage } from './pages/profile/UserProfilePage';
 
-export default function Home() {
+export default function App() {
   const { data, isLoading, error } = useExplorePublicationsQuery(
     {
       request: {
@@ -34,14 +31,25 @@ export default function Home() {
 
   return (
     <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home data={data} />} />
+        <Route path="/profile/:handle" element={<UserProfilePage />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+function Home({ data }) {
+  return (
+    <>
       <SignInButton />
       <div className={styles.container}>
         <div className={styles.postsContainer}>
           {data.explorePublications.items.map((publication) => (
-            <FeedPost publication={publication} key={publication.id}></FeedPost>
+            <FeedPost publication={publication} key={publication.id} />
           ))}
         </div>
       </div>
-    </BrowserRouter>
+    </>
   );
 }
