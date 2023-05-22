@@ -9,6 +9,7 @@ import FeedPost from './components/FeedPost';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { UserProfilePage } from './pages/profile/UserProfilePage';
 import Header from './components/Header';
+import Create from './pages/create';
 
 export default function App() {
   const { data, isLoading, error } = useExplorePublicationsQuery(
@@ -39,6 +40,7 @@ export default function App() {
       <Routes>
         <Route path='/' element={<Home data={data} />} />
         <Route path='/profile/:handle' element={<UserProfilePage />} />
+        <Route path='/create' element={<Create />} />
       </Routes>
     </BrowserRouter>
   );

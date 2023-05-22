@@ -8,10 +8,11 @@ export default function Header() {
   return (
     <>
       <div className={styles.headerContainer}>
-        <div>
+        <div className={styles.left}>
           <Link to={'/'}>
             <img src={mini} alt='logo' className={styles.logo}></img>
           </Link>
+          <Link to={'/create'}>Create</Link>
         </div>
         <div className={styles.right}>
           <SignInButton></SignInButton>

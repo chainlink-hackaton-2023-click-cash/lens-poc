@@ -22,3 +22,14 @@
 .right {
   margin-right: 16px;
 }
+
+.left {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+}
+
+.left a {
+  color: black;
+}
