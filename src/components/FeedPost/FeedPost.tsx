@@ -9,6 +9,8 @@ type Props = {
 };
 
 export default function FeedPost({ publication }: Props) {
+  // publication.reaction --> for UPVOTES or DOWNVOTES
+
   return (
     <div className={styles.feedPostContainer}>
       <div className={styles.feedPostHeader}>
@@ -19,16 +21,27 @@ export default function FeedPost({ publication }: Props) {
           className={styles.feedPostProfilePicture}
         ></MediaRenderer>
 
-        <Link to={`/profile/${publication.profile.handle}`} className={styles.feedPostProfileName}>
+        <Link
+          to={`/profile/${publication.profile.handle}`}
+          className={styles.feedPostProfileName}
+        >
           {publication.profile.name || publication.profile.handle}
         </Link>
 
         <div className={styles.feedPostContent}>
-          <h3 className={styles.feedPostContentTitle}>{publication.metadata.name}</h3>
-          <p className={styles.feedPostContentDescription}>{publication.metadata.content}</p>
-          {publication.metadata.media?.length > 0 && (
+          <h3 className={styles.feedPostContentTitle}>
+            {publication.metadata.name}
+          </h3>
+          <p className={styles.feedPostContentDescription}>
+            {publication.metadata.content}
+          </p>
+          {(publication.metadata.image ||
+            publication.metadata.media?.length > 0) && (
             <MediaRenderer
-              src={publication.metadata.media[0].original.url}
+              src={
+                publication.metadata.image ||
+                publication.metadata.media[0].original.url
+              }
               alt={publication.metadata.name || ''}
               className={styles.feedPostContentImage}
             ></MediaRenderer>
