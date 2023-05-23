@@ -62,17 +62,19 @@ export function useFollow() {
     console.log('r', r);
     console.log('s', s);
 
-    const result = await lensHubContract.call('followWithSig', {
-      follower: address,
-      profileIds: [userId],
-      datas: value.datas,
-      sig: {
-        v,
-        r,
-        s,
-        deadline: value.deadline,
+    const result = await lensHubContract.call('followWithSig', [
+      {
+        follower: address,
+        profileIds: [userId],
+        datas: value.datas,
+        sig: {
+          v,
+          r,
+          s,
+          deadline: value.deadline,
+        },
       },
-    });
+    ]);
 
     console.log('result', result);
   }
